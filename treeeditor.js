@@ -1,3 +1,5 @@
+//put a box around each node in the tree
+
 var Node = function(name) {
     var that = this;
     that.name = name;
@@ -22,20 +24,23 @@ var egg = alan.addChild("egg");
 var squab = moe.addChild("squab");
 //console.log(cindy);
 
-var x = '';
-var printnames = function(tree, n) {
+
+var printnames = function(tree, n, box) {
+    // debugger;
     //console.log(tree.name, n);
     console.log('|' + '-'.repeat(n) + ' ' + tree.name);
-    x = x + '<div> |' + '-'.repeat(n) + ' ' + tree.name + '</div>';
-    $('#x').html(x);
+    var p = $('<div class="node">' + tree.name + '</div>');
+
+    $(box).append(p);
 
     if (tree.children.length == 0) {
         return;
     } else {
         for (var i = 0; i < tree.children.length; i++) {
-            printnames(tree.children[i], n + 1);
+            printnames(tree.children[i], n + 1, p);
         }
     }
 
 };
-printnames(cindy, 0);
+var container = $('#container');
+printnames(cindy, 0, container);
